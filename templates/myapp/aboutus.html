@@ -1,0 +1,26 @@
+{% extends 'myapp/base.html' %}
+
+{%block title%}Laos amulet-about us{%endblock title%}
+
+{% block menubar%}
+<a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="home">homepage</a>
+<a class="nav-link fw-bold py-1 px-0 " href="{% url 'all-products-link' %}">products</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'posts' %}">blog</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'tracking' %}">Check tracking</a>
+<a class="nav-link fw-bold py-1 px-0 active" href="{% url 'about-us' %}">About us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'contact' %}">Contact us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'consult' %}">Consult us</a>
+
+<div class="ms-auto d-flex">
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'register' %}">register</a>
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'login' %}">login</a>
+</div>
+{% endblock menubar%}
+
+{% block content %}
+<h1>what is our service</h1>
+<p class="lead">we are biggest amulet store in Laos </p>
+<p class="lead">
+  <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">see more ...</a>
+</p>
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends 'myapp/base.html' %}
+{% block menubar%}
+<a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="home">homepage</a>
+<a class="nav-link fw-bold py-1 px-0 " href="{% url 'all-products-link' %}">products</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'posts' %}">blog</a>
+<a class="nav-link fw-bold py-1 px-0 active" href="{% url 'tracking' %}">Check tracking</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'about-us' %}">About us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'contact' %}">Contact us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'consult' %}">Consult us</a>
+<div class="ms-auto d-flex">
+   <a class="nav-link fw-bold py-1 px-0" href="{% url 'register' %}">register</a>
+   <a class="nav-link fw-bold py-1 px-0" href="{% url 'login' %}">login</a>
+ </div>
+{% endblock menubar%}
+{%block title%}amulet-tracking{%endblock title%}
+
+
+
+{% block content %}
+
+{% for t in tracking %}
+   {% if t.Tracking %}
+      <h1> {{t.name}} </h1>
+      <h2> {{t.Tracking}} </h2>  <!--name of model Tracking-->
+   {% else %} 
+      <h1> {{t.name}} </h1>
+      <h2> not shipping </h2>
+   {% endif %}
+   -----------
+{% endfor %}
+
+{% endblock content %}

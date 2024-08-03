@@ -1,0 +1,9 @@
+.conditions-list {
+    list-style-type: disc;
+    padding-left: 20px; /* Adjust as needed for proper indentation */
+    text-align: left;
+}
+
+.conditions-list li {
+    margin-bottom: 5px; /* Add some spacing between list items */
+}

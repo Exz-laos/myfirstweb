@@ -1,0 +1,57 @@
+{% extends 'myapp/base.html' %}
+
+{% load static %}
+
+{% block title%}Exz-article blog{% endblock title %}
+
+{% block menubar%}
+<a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="{% url 'home' %}">homepage</a>
+<a class="nav-link fw-bold py-1 px-0 " href="{% url 'all-products-link' %}">products</a>
+<a class="nav-link fw-bold py-1 px-0 active" href="{% url 'posts' %}">blog</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'tracking' %}">Check tracking</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'about-us' %}">About us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'contact' %}">Contact us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'consult' %}">Consult us</a>
+<div class="ms-auto d-flex">
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'register' %}">register</a>
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'login' %}">login</a>
+</div>
+{% endblock menubar%}
+
+
+{% block content %}
+<main>
+
+    <section class="py-5 text-center container">
+    <div class="album py-5 bg-body-dark">
+      <div class="container">
+  
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 text-start">
+          {% for post in posts %}
+          <div class="col">
+            <div class="card shadow-sm">
+              {% if post.images  %}
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" style="object-fit:cover;" src="{{ post.images.url }}"/>
+              {% else  %}
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" style="object-fit:cover;" src="{% static 'images/images.png' %}"/>
+              {% endif  %}
+              
+              <div class="card-body">
+                <p class="card-text">{{ post.title }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="{% url 'post-detail' post.slug%}"> <button type="button" class="btn btn-sm btn-outline-secondary">Read..</button> </a>
+                   
+                  </div>
+                  <small class="text-body-secondary">{{ post.date_created|date }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</section>
+  </main>
+{% endblock content %}

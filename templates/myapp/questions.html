@@ -1,0 +1,38 @@
+{% extends 'myapp/base.html' %}
+{% block menubar%}
+<a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="home">homepage</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'posts' %}">blog</a>
+<a class="nav-link fw-bold py-1 px-0 active" href="{% url 'tracking' %}">Check tracking</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'about-us' %}">About us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'contact' %}">Contact us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'consult' %}">Consult us</a>
+{% endblock menubar%}
+{%block title%}amulet-tracking{%endblock title%}
+
+
+{% block content %}
+<table class="table">
+   <thead>
+     <tr><!-- table row-->
+   
+       <th scope="col">name</th>
+       <th scope="col">email</th>
+       <th scope="col">topic</th>
+       <th scope="col">detail</th>
+       <th scope="col">edit</th>
+     </tr>
+   </thead>
+   <tbody><!-- table body-->
+  
+     {% for q in questions %}
+       <tr>
+        <td>{{q.name}}</td>
+        <td>{{q.email}}</td>
+        <td>{{q.title}}</td>
+        <td>{{q.detail}}</td>
+        <td><a href="{% url 'answer' q.id %}" class="btn btn-primiry">answer</a></td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+{% endblock content %}

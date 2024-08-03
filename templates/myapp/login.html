@@ -1,0 +1,58 @@
+{% extends 'myapp/base.html' %}
+{% block menubar%}
+
+ <div class="ms-auto d-flex">
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'home' %}">back</a>
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'register' %}">register</a>
+  <a class="nav-link fw-bold py-1 px-0 active" href="{% url 'login' %}">login</a>
+</div>
+
+{% endblock menubar%}
+{%block title%}Login{%endblock title%}
+{% block content %}
+
+
+{% if noUser %}
+<br><br>
+<div class="alert alert-warning" role="alert">
+    this email is not existed in system, Please register membership
+   </div>
+    
+   <center><a  href=" {% url 'register' %}" role="button">Apply new member</a></center>
+{% endif %}
+
+{% if wrongpassword %}
+<br><br>
+<div class="alert alert-warning" role="alert">
+              Password was wrong, please enter password again or reset password
+   </div>
+    
+   <center><a  href=" {% url 'register' %}" role="button">reset password</a></center>
+{% endif %}
+
+
+
+<h1>login to the website!</h1>
+
+<div class="container">
+    <form method="POST"><!--its used for sending data to backend-->
+       {% csrf_token %} <!--its related to securely token(special PW)-->
+       <!--its important to prevent hacking ,uesful-->
+      
+       <div class="form-group"> <!--form group-->
+         <label for="email">email</label>
+         <input type="email" class="form-control" id="email" name="email"> <!-- inside id=for-->
+      </div><br>
+
+
+       <div class="form-group"> <!--form group-->
+         <label for="password">password</label>
+         <input type="password" class="form-control" id="password" name="password"> <!-- inside id=for-->
+       </div><br>
+
+  <button type="submit" class="btn btn-primary"> submit </button>
+  <br><br>
+  <p>Register the member <a href = "{% url 'register' %}">click here</a></p>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends 'myapp/base.html' %}
+
+{% load static %}
+
+{% block title%}Exz.com-products{% endblock title %}
+
+{% block menubar%}
+<a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="{% url 'home' %}">homepage</a>
+<a class="nav-link fw-bold py-1 px-0 active" href="{% url 'all-products-link' %}">products</a>
+<a class="nav-link fw-bold py-1 px-0 " href="{% url 'posts' %}">blog</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'tracking' %}">Check tracking</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'about-us' %}">About us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'contact' %}">Contact us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'consult' %}">Consult us</a>
+<div class="ms-auto d-flex">
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'register' %}">register</a>
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'login' %}">login</a>
+</div>
+{% endblock menubar%}
+
+
+{% block content %}
+
+
+<!-- <p>User is authenticated: {{ user.is_authenticated }}</p>
+<p>User type: {{ user_profile.usertype }}</p>
+<p>User discount: {{ user_discount.active }}</p> -->
+
+  {% if user.is_authenticated and user_profile.usertype == 'vip' and user_discount.active == False %}
+          <br><br>
+          <div class="container">
+              <div class="alert alert-primary" role="alert">
+                  You received <a href="{% url 'discount-link' %}" class="alert-link">Super VIP discount!!</a> save your money 99 %
+              </div>
+          </div>
+    
+  {% endif %}
+
+  <!-- 
+  {% if user.is_authenticated and user.profile.usertype == 'vip' %}
+
+  <br><br>
+  <div class="container">
+
+    <div class="alert alert-primary" role="alert">
+      You received  <a href="#" class="alert-link">Super VIP discount!!</a> save your money 99 %
+    </div>
+  </div>
+
+  {% endif %} -->
+
+
+
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-white">X store</h1>
+      <p class="fs-5 text-body-white">Exz.COM</p>
+  </div>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-left">
+      {% for product in all_product %}
+      <div class="col">
+    
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+              {% if product.images %}
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" style="object-fit: cover;" src="{{ product.images.url }}"></img>
+              {% else %}
+              <p>no photo</p>
+              {% endif %}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title pricing-card-title">Price {{ product.price1 }}<small class="text-body-secondary fw-light">/KIP</small></h5>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>{{ product.name }}</li>
+              <li>Product type {{ product.category.category_name }}</li>
+              <li>Quantity {{ product.quantity }}<small class="text-body-secondary fw-light"> {{ product.unit }}</small></li>
+            </ul>
+            <a class="btn btn-lg btn-light fw-bold border-white bg-white" href="{%url 'product-detail' product.slug %}"  >ສັ່ງຊື້!</a>
+            
+          </div>
+        </div>
+        
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends 'myapp/base.html' %}
+
+{% load static %}
+
+{% block title%}Exz.com-product tracking-order{% endblock title %}
+{% block menubar%}
+<a class="nav-link fw-bold py-1 px-0 " aria-current="page" href="{% url 'home' %}">homepage</a>
+<a class="nav-link fw-bold py-1 px-0 active" href="{% url 'all-products-link' %}">products</a>
+<a class="nav-link fw-bold py-1 px-0 " href="{% url 'posts' %}">blog</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'tracking' %}">Check tracking</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'about-us' %}">About us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'contact' %}">Contact us</a>
+<a class="nav-link fw-bold py-1 px-0" href="{% url 'consult' %}">Consult us</a>
+<div class="ms-auto d-flex">
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'register' %}">register</a>
+  <a class="nav-link fw-bold py-1 px-0" href="{% url 'login' %}">login</a>
+</div>
+{% endblock menubar%}
+{% block content %}
+<div class="container my-5 ">
+    <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5">
+        <span style="color: red;" >!!! ກະລຸນາແຄັບໜ້ານີ້ໄວ້!!!</span><br><br>
+      ເລກທີ່ອ້າງອີງ <span style="color: tomato;">{{order_id}}</span>
+
+      <p class="col-lg-6 mx-auto mb-4">
+        ຫາກມີຄວາມຄືບໜ້າທີມງານຈະຕິດຕໍ່ຫາ
+      </p>
+      <h4 style="font-style: bold; color: rgb(63, 30, 255);"> รายละเอียด: </h4>
+        <h5>ສິນຄ້າ:{{tracking_id.products.name}}</h5>  
+        <h5>ຈຳນວນ: {{tracking_id.count}} {{tracking_id.products.unit}}</h5>
+        <h5>ລາຄາສິນຄ້າ: <span id="book_total">{{buyer_price}}</span> ກີບ</h5>
+        <h5>ຄ່າສົ່ງ: <span id="shipping_total">{{shipping_cost}}</span> ກີບ</h5>
+        <br>
+        <h4>ຍອດລວມທັງໝົດ: <span id="all_total">{{all_price}}</span> ກີບ</h4>
+        <br>
+
+      <a href="{{tracking_id.slip.url}}"><img src="{{tracking_id.slip.url}}" alt="" width="400" class=" border border-dark"></a> 
+      <p>--------------------------------------------</p>
+        <h4 style="font-style: bold; color: hsl(236, 96%, 55%);"> ຂໍ້ມູນຜູ້ຊຶ້: </h4>
+        <h5>ຊື່:{{tracking_id.first_name}} {{tracking_id.last_name}} </h5>
+        <h5>Email:{{tracking_id.email}} </h5>
+        <h5>Tel:{{tracking_id.tel}} </h5>
+        <h5>ທີ່ຢູ່: {{tracking_id.address}}</h5>
+    </div>
+  </div>
+  
+{% endblock content %}
